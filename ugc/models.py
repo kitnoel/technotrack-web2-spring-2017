@@ -4,8 +4,7 @@ from django.db import models
 
 
 class Post(Authored, Dated, Eventable):
-    post_id = models.IntegerField()
-    content = models.CharField(max_length=500)
+    content = models.TextField(max_length=500)
     template_name = 'post'
 
     def get_event_title(self):

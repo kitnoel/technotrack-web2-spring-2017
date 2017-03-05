@@ -19,7 +19,7 @@ class Authored(models.Model):
 
 class Dated(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
@@ -38,7 +38,7 @@ class Eventable(models.Model):
         abstract = True
 
 
-class Request(models.Model):  # friend, invite etc
+class Request(Authored):  # friend, invite etc
     accepted = models.BooleanField(default=False)
     to_user = models.ForeignKey(User, related_name='to_user')
 

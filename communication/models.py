@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from core.models import Authored, Dated
+from core.models import Authored, Dated, User
 from django.db import models
 
 # Create your models here.
@@ -7,6 +7,7 @@ from django.db import models
 
 class Chat(Authored, Dated):
     title = models.CharField(max_length=64)
+    users = models.ManyToManyField(User, related_name='chats')
 
     def __unicode__(self):
         return u'{}'.format(self.title[:32])

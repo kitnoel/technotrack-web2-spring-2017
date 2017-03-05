@@ -1,11 +1,11 @@
 # coding: utf8
 
 from __future__ import unicode_literals
-from core.models import Authored, Dated, Eventable, Request
+from core.models import Authored, Dated, Eventable, Request, User
 from django.db import models
 
 
-class FriendRequest(Authored, Dated, Eventable, Request):
+class FriendRequest(Dated, Eventable, Request):
 
     def accept(self):
         pass
@@ -19,8 +19,8 @@ class FriendRequest(Authored, Dated, Eventable, Request):
         return u'From {} To {}'.format(str(self.author), str(self.to_user))
 
 
-class Friendship(models.Model):
-    # TODO:  2 записи => 2 френдзапроса => 2жды Authored и 2жды RequestToUser или как создать новый интрефейс??
-    pass
-    # def __unicode__(self):
-    #     return u'Between {} and {}'.format()
+class Friendship(Authored):
+    to_user = models.ForeignKey(User, related_name='receiver')
+
+    def __unicode__(self):
+        return u'Between {} and {}'.format(str(self.author), str(self.to_user))
