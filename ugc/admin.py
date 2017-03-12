@@ -7,6 +7,7 @@ from models import Post, Comment
 
 class CommentInline(admin.TabularInline):
     model = Comment
+    extra = 0
 
 
 @admin.register(Post)
