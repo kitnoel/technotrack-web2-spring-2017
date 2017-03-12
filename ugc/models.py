@@ -12,3 +12,16 @@ class Post(Authored, Dated, Eventable):
 
     def __unicode__(self):
         return u'{}'.format(self.content[:32])
+
+
+class Comment(Authored, Dated, Eventable):
+    text = models.CharField(max_length=255)
+    post = models.ForeignKey('Post', related_name='comments')
+    ordering = ('-created',)
+    template_name = 'comment'
+
+    def get_event_title(self):
+        return '{} commented post "{}"'.format(self.author)
+
+    def __unicode__(self):
+        return u'{}'.format(self.text)
