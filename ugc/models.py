@@ -9,6 +9,7 @@ from likes.models import Likeable
 
 class Post(Authored, Dated, Eventable, Likeable):
     content = models.TextField(max_length=500)
+    likes_count = models.IntegerField(default=0)
     template_name = 'post_template'
 
     def get_event_title(self):
