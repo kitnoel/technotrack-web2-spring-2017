@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
+from likes.admin import LikeInline
 from models import Post, Comment
 
 
@@ -11,7 +12,7 @@ class CommentInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
 
-    inlines = [CommentInline, ]
+    inlines = [CommentInline, LikeInline]
 
 
 @admin.register(Comment)
