@@ -21,6 +21,8 @@ class Likeable(models.Model):
         object_id_field='target_id',
     )
 
+    likes_count = models.IntegerField(default=0)
+
     class Meta:
         abstract = True
 
