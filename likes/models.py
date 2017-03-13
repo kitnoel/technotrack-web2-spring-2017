@@ -4,7 +4,8 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
-from core.models import Authored, Eventable
+from core.models import Authored
+from feed.models import Eventable
 
 
 class Like(Authored, Eventable):

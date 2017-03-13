@@ -25,19 +25,6 @@ class Dated(models.Model):
         abstract = True
 
 
-class Eventable(models.Model):
-    template_name = None
-
-    def get_event_html(self):
-        return Template('events/{}_html.html'.format(self.template_name), {'object': self})
-
-    def get_event_title(self):
-        raise NotImplementedError
-
-    class Meta:
-        abstract = True
-
-
 class Request(Authored):  # friend, invite etc
     accepted = models.BooleanField(default=False)
     to_user = models.ForeignKey(User, related_name='to_user')

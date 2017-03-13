@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'relationships.apps.RelationshipsConfig',
     'communication.apps.CommunicationConfig',
     'likes.apps.LikesConfig',
+    'feed.apps.FeedConfig',
 ]
 
 MIDDLEWARE = [
