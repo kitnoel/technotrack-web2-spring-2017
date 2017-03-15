@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Event(models.Model):
-
+    type = models.CharField(max_length=64)  # one from ['created', 'updated']
     object_content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey(ct_field='object_content_type', fk_field='object_id')
@@ -18,9 +18,13 @@ class Eventable(models.Model):
     # def get_event_html(self):
     #     return Template('events/{}_html.html'.format(self.template_name), {'object': self})
     #
-    # def get_event_title(self):
-    #     raise NotImplementedError
-    creation_events = GenericRelation(
+    def get_event_title(self):
+        raise NotImplementedError
+
+    def get_feed_state(self):
+        raise NotImplementedError
+
+    events = GenericRelation(
         Event,
         content_type_field='object_content_type',
         object_id_field='object_id'

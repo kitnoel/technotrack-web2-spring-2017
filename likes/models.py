@@ -10,6 +10,12 @@ from feed.models import Eventable
 
 class Like(Authored, Eventable):
 
+    def get_feed_state(self):
+        pass
+
+    def get_event_title(self):
+        return '{} likes {} {}'.join(self.author, str(self.target_content_type), unicode(self.target))
+
     target_content_type = models.ForeignKey(ContentType)
     target_id = models.PositiveIntegerField()
     target = GenericForeignKey(ct_field='target_content_type', fk_field='target_id')

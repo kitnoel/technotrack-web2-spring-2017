@@ -25,15 +25,4 @@ class Dated(models.Model):
         abstract = True
 
 
-class Request(Authored):  # friend, invite etc
-    accepted = models.BooleanField(default=False)
-    to_user = models.ForeignKey(User, related_name='to_user')
-
-    def accept(self):
-        raise NotImplementedError
-
-    class Meta:
-        abstract = True
-
-
 
