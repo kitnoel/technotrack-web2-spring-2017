@@ -14,12 +14,9 @@ def create_event(instance, created=False, *args, **kwargs):
 
     if created:
         e = Event.objects.create(object=instance, type='created')
-        e.save()
 
     elif instance.state_old != instance.get_feed_state():
         e = Event.objects.create(object=instance, type='updated')
-        e.save()
-
 
 for eventable in Eventable.__subclasses__():
     pre_save.connect(check_state, sender=eventable)

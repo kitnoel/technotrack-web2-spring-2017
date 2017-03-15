@@ -21,16 +21,26 @@ class Request(Authored):  # friend, invite etc
 
 class FriendRequest(Dated, Eventable, Request):
 
-    def accept(self):
-        pass
-
     # template_name = 'friend_request'
     #
+    prev_state = models.BooleanField(default=False)
+
+    def accept(self):
+        if self.friendships.count() == 0:
+            self.accepted = True
+            self.save(force_update=True)
+
+    def reject(self):
+        if self.friendships.count() > 0:
+            self.prev_state = self.accepted
+            self.accepted = False
+            self.save(force_update=True)
+
     def get_event_title(self):
         return '{} wants to be friend of {}'. format(self.author, self.to_user)
 
     def get_feed_state(self):
-        return self.accepted
+        return self.prev_state
 
     def __unicode__(self):
         return u'From {} To {}'.format(str(self.author), str(self.to_user))
