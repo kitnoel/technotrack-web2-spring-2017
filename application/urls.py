@@ -16,9 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+# from ugc.api import PostRetriever
+from api import router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'^posts/(?P<pk>\d+)', PostRetriever.as_view()),
+    url(r'^api/', include(router.urls)),
 ]
 
 if settings.DEBUG:

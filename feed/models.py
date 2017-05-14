@@ -4,8 +4,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+from core.models import Authored
 
-class Event(models.Model):
+
+class Event(Authored):
     type = models.CharField(max_length=64)  # one from ['created', 'updated']
     object_content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
