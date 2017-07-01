@@ -9,18 +9,23 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'author', 'created', 'updated', 'likes_count']
+        fields = ['content', 'likes_count', 'author', 'created', 'updated', 'id', ]
+        read_only_fields = ['likes_count', 'author', 'created', 'updated', 'id', ]
 
 
-# class PostingPermission(permissions.BasePermission):
-#
-#     def has_object_permission(self, request, view, obj):
-#         return obj.author == request.author
+class IsAuthor(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request._request.method in ('GET', ):
+            return True
+        else:
+            return obj.author == request.user
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthor, ]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
