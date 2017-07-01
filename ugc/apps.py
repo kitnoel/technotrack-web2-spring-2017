@@ -8,4 +8,5 @@ class UgcConfig(AppConfig):
 
     def ready(self):
         import signals
+        import api
 
