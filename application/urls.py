@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login),
     url(r'^logout/$', auth_views.logout),
     url(r'^social/', include('social_django.urls', namespace='social')),
+    url(r'^', include('templated_email.urls', namespace='templated_email')),
 ]
 
 if settings.DEBUG:

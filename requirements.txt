@@ -3,3 +3,6 @@ mysqlclient==1.3.9
 django-debug-toolbar==1.6
 djangorestframework==3.6.3
 social-auth-app-django
+celery
+redis
+django-templated-email

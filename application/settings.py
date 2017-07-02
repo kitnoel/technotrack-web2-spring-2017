@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'social_django',
+    'templated_email',
 
     'core.apps.CoreConfig',
     'ugc.apps.UgcConfig',
@@ -135,6 +136,19 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+BROKER_URL = 'redis://localhost:6379/0'
+ACCEPT_CONTENT = ['json']
+TASK_SERIALIZER = 'json'
+RESULT_SERIALIZER = 'json'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config.get('email', 'USER')
+EMAIL_HOST_PASSWORD = config.get('email', 'PASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

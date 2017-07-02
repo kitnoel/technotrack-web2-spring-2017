@@ -1,0 +1,23 @@
+{% block subject %}Posts at {{ date }}{% endblock %}
+{% block plain %}
+    Hi {{username}},
+    Posts for {{ date }}
+    {% for post in posts %}
+        {{ post.author.username }}
+        {{ post.content }}
+    {% endfor %}
+{% endblock %}
+
+{% block html %}
+    <p>Hi {{username}},</p>
+    <p>Posts for {{ date }}</p>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <img src="{{ image }}">
+            {{ post.author.username }}
+            <p>{{ post.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

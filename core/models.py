@@ -23,6 +23,3 @@ class Dated(models.Model):
 
     class Meta:
         abstract = True
-
-
-
