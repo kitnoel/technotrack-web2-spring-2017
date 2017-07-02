@@ -6,3 +6,6 @@ social-auth-app-django
 celery
 redis
 django-templated-email
+django-email-registration
+towel
+coverage

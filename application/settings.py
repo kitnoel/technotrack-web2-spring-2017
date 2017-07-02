@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'social_django',
     'templated_email',
+    'email_registration',
+    'towel',
 
     'core.apps.CoreConfig',
     'ugc.apps.UgcConfig',

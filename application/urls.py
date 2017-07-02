@@ -22,10 +22,12 @@ from api import router
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
-    url(r'^login/$', auth_views.login),
+    url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout),
     url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^', include('templated_email.urls', namespace='templated_email')),
+    url(r'^', include('email_registration.urls')),
+
 ]
 
 if settings.DEBUG:
