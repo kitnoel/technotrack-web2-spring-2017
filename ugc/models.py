@@ -12,6 +12,9 @@ class Post(Authored, Dated, Eventable, Likeable):
     # template_name = 'post_template'
     #
 
+    class Meta:
+        ordering = ('-created',)
+
     def get_event_title(self):
         return '{} published new post "{}"'.format(self.author, self.content[:32])
 

@@ -12,7 +12,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = ['content', 'chat', 'author', 'created']
+        fields = ['content', 'chat', 'author', 'created', 'id']
 
 
 # class IsInChat(permissions.BasePermission):
@@ -37,6 +37,9 @@ class MessageViewSet(viewsets.ModelViewSet):
             Q(chat__users=self.request.user)
         )
         qs = qs.distinct()
+        chat = self.request.query_params.get('chat')
+        if chat is not None:
+            qs = qs.filter(chat=chat)
         return qs
 
     def perform_create(self, serializer):
@@ -55,7 +58,7 @@ class ChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chat
-        fields = ['id', 'users', 'last_message', 'author']
+        fields = ['id', 'users', 'last_message', 'author', 'title']
 
 
 class ChatViewSet(viewsets.ModelViewSet):

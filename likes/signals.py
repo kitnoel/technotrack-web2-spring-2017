@@ -1,4 +1,6 @@
+# coding: utf8
 from celery import shared_task
+from adjacent import Client
 from django.db.models.signals import post_save, post_delete, pre_delete
 
 from likes.models import Like
@@ -12,6 +14,14 @@ def set_likes_count(like_id):
 
 
 def add_like(instance, async=False, created=False, *args, **kwargs):
+    client = Client()
+
+    # add some messages to publish
+    client.publish("news", {"msg": u"{} поставил вам лайк!".format(instance.author.username)})
+
+    # actually send request with 2 publish messages added above to Centrifuge
+    response = client.send()
+
     if async:
         set_likes_count.apply_async([instance.id])
     else:

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'templated_email',
     'email_registration',
     'towel',
+    'webpack_loader',
 
     'core.apps.CoreConfig',
     'ugc.apps.UgcConfig',
@@ -84,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'adjacent.context_processors.main',
             ],
         },
     },
@@ -139,6 +141,10 @@ REST_FRAMEWORK = {
     )
 }
 
+CENTRIFUGE_ADDRESS = 'ws:127.0.0.1:8001/'
+CENTRIFUGE_SECRET = 'a51c9125-dc37-45e7-b338-c99e8c9956ac'
+CENTRIFUGE_TIMEOUT = 10
+
 BROKER_URL = 'redis://localhost:6379/0'
 ACCEPT_CONTENT = ['json']
 TASK_SERIALIZER = 'json'
@@ -170,3 +176,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+   '/home/lekse/WebstormProjects/webpack/static/',
+)
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'build/',
+        'STATS_FILE': '/home/lekse/WebstormProjects/webpack/webpack-stats.json',
+    }
+}

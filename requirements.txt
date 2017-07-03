@@ -9,3 +9,5 @@ django-templated-email
 django-email-registration
 towel
 coverage
+django-webpack-loader
+adjacent
