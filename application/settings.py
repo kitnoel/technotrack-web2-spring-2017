@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'email_registration',
     'towel',
     'webpack_loader',
+    'adjacent',
+    'haystack',
 
     'core.apps.CoreConfig',
     'ugc.apps.UgcConfig',
@@ -141,10 +143,18 @@ REST_FRAMEWORK = {
     )
 }
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
 CENTRIFUGE_ADDRESS = 'ws:127.0.0.1:8001/'
 CENTRIFUGE_SECRET = 'a51c9125-dc37-45e7-b338-c99e8c9956ac'
 CENTRIFUGE_TIMEOUT = 10
 
+# CELERY
 BROKER_URL = 'redis://localhost:6379/0'
 ACCEPT_CONTENT = ['json']
 TASK_SERIALIZER = 'json'
@@ -178,12 +188,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-   '/home/lekse/WebstormProjects/webpack/static/',
+   BASE_DIR + '/front/static/',
 )
 
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'build/',
-        'STATS_FILE': '/home/lekse/WebstormProjects/webpack/webpack-stats.json',
+        'STATS_FILE': BASE_DIR + '/front/webpack-stats.json',
     }
 }

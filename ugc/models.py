@@ -15,6 +15,9 @@ class Post(Authored, Dated, Eventable, Likeable):
     class Meta:
         ordering = ('-created',)
 
+    # @models.permalink
+    # def get_absolute_url(self):
+
     def get_event_title(self):
         return '{} published new post "{}"'.format(self.author, self.content[:32])
 
