@@ -6,6 +6,8 @@ export const SEND_POST = 'SEND_POST';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
 export const LOAD_POSTS_ERROR = 'LOAD_POSTS_ERROR';
+export const SEARCH_POSTS = 'SEARCH_POSTS';
+export const SEARCH_POSTS_SUCCESS = 'SEARCH_POSTS_SUCCESS';
 
 export function addPost(post) {
     return {
@@ -27,6 +29,20 @@ export function loadPostsSuccess(responce) {
     };
 }
 
+export function searchPosts() {
+    return {
+        type: SEARCH_POSTS,
+    };
+}
+
+export function searchPostsSuccess(responce) {
+    return {
+        type: SEARCH_POSTS_SUCCESS,
+        responce
+    };
+}
+
+
 export function loadPostsError() {
     return {
         type: LOAD_POSTS_ERROR,
@@ -36,10 +52,26 @@ export function loadPostsError() {
 export function fetchPosts() {
     return dispatch => {
         dispatch(loadPosts());
-        return fetch('/api/posts/')
+        return fetch('/api/posts/', {
+            credentials: "same-origin",
+        })
             .then(responce => responce.json())
             .then(json => {console.log(json); return json;})
             .then(json => dispatch(loadPostsSuccess(json)));
+    };
+}
+
+export function fetchSearchPosts(text) {
+    return dispatch => {
+        dispatch(searchPosts());
+        // let formData = new FormData();
+        // formData.append('csrfmiddlewaretoken', Cookies.get('csrftoken'));
+        return fetch('/api/posts/search/?content__contains='+text, {
+            credentials: "same-origin",
+        })
+            .then(responce => responce.json())
+            .then(json => {console.log(json); return json;})
+            .then(json => dispatch(searchPostsSuccess(json)));
     };
 }
 

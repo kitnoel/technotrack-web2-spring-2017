@@ -13,11 +13,11 @@ class PostIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Post
 
-    @staticmethod
-    def prepare_autocomplete(obj):
-        return " ".join((
-            obj.author, obj.created
-        ))
+    # @staticmethod
+    # def prepare_autocomplete(obj):
+    #     return " ".join((
+    #         obj.author, obj.created
+    #     ))
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""

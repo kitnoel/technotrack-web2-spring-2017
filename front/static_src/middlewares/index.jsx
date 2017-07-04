@@ -2,9 +2,11 @@ import { LOAD_POSTS_SUCCESS } from '../actions/posts.jsx';
 import { LOAD_CHATS_SUCCESS } from '../actions/chats.jsx';
 import { normalize, schema } from 'normalizr';
 import {LOAD_CHAT_SUCCESS} from "../actions/chats.jsx";
+import {SEARCH_POSTS_SUCCESS} from "../actions/posts.jsx";
 
 export const normalizer = store => next => action => {
     switch (action.type) {
+        case SEARCH_POSTS_SUCCESS:
         case LOAD_POSTS_SUCCESS: {
             const user = new schema.Entity('users');
             const post = new schema.Entity('posts', {

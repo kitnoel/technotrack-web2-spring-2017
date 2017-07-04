@@ -14,13 +14,13 @@ def set_likes_count(like_id):
 
 
 def add_like(instance, async=False, created=False, *args, **kwargs):
-    client = Client()
-
-    # add some messages to publish
-    client.publish("news", {"msg": u"{} поставил вам лайк!".format(instance.author.username)})
-
-    # actually send request with 2 publish messages added above to Centrifuge
-    response = client.send()
+    # client = Client()
+    #
+    # # add some messages to publish
+    # client.publish("news", {"msg": u"{} поставил вам лайк!".format(instance.author.username)})
+    #
+    # # actually send request with 2 publish messages added above to Centrifuge
+    # response = client.send()
 
     if async:
         set_likes_count.apply_async([instance.id])

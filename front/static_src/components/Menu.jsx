@@ -8,6 +8,7 @@ import TabContent from "react-bootstrap/es/TabContent";
 import TabPane from "react-bootstrap/es/TabPane";
 import ChatList from "./ChatList.jsx";
 import PostList from "./PostList.jsx";
+import PostSearch from "./PostSearch.jsx";
 
 
 class MenuComponent extends React.Component {
@@ -28,6 +29,9 @@ class MenuComponent extends React.Component {
                             <NavItem eventKey="feed">
                                 Feed
                             </NavItem>
+                            <NavItem eventKey="search">
+                                Search posts
+                            </NavItem>
                         </Nav>
                     </Col>
                     <Col sm={8}>
@@ -40,6 +44,9 @@ class MenuComponent extends React.Component {
                             </TabPane>
                             <TabPane eventKey="feed">
                                 <PostList />
+                            </TabPane>
+                            <TabPane eventKey="search">
+                                <PostSearch />
                             </TabPane>
                         </TabContent>
                     </Col>
